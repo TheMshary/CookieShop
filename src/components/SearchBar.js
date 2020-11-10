@@ -1,10 +1,13 @@
-import React from 'react'
+import React from "react";
 import { SearchBarStyled } from "../styles";
 
-const SearchBar = (props) => {
+const SearchBar = ({ setQuery }) => {
   return (
-    <SearchBarStyled placeholder="Search for a cookie name..." onChange={(event) => props.setQuery(event.target.value)} />
-  )
-}
+    <SearchBarStyled
+      placeholder="Search for a cookie name..."
+      onChange={(event) => setQuery(event.target.value)}
+    />
+  );
+};
 
 export default SearchBar;

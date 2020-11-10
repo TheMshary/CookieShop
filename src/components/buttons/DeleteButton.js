@@ -1,16 +1,12 @@
-import React from 'react'
+import React from "react";
 import { DeleteButtonStyled } from "../../styles";
 
-const DeleteButton = (props) => {
-  const cookieId = props.cookieId;
-  const handleDelete = () => {
-    props.deleteCookie(cookieId);
-  }
+const DeleteButton = ({ cookieId, deleteCookie }) => {
   return (
-    <DeleteButtonStyled onClick={handleDelete}>
+    <DeleteButtonStyled onClick={() => deleteCookie(cookieId)}>
       Delete
     </DeleteButtonStyled>
-  )
-}
+  );
+};
 
-export default DeleteButton
+export default DeleteButton;
