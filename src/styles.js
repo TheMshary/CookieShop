@@ -1,14 +1,31 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { Link, NavLink } from "react-router-dom";
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    color: ${props => props.theme.mainColor};
-    background-color: ${props => props.theme.backgroundColor};
+    color: ${(props) => props.theme.mainColor};
+    background-color: ${(props) => props.theme.backgroundColor};
+  }
+`;
+export const Logo = styled(Link)`
+  padding: 0.75em;
+
+  img {
+    width: 8rem;
+  }
+`;
+
+export const NavItem = styled(NavLink)`
+  padding: 0.25em 1em;
+  color: ${({ theme }) => theme.mainColor};
+
+  &.active {
+    background-color: ${(props) => props.theme.pink};
   }
 `;
 
 export const DeleteButtonStyled = styled.p`
-  color: ${props => props.theme.red}
+  color: ${(props) => props.theme.red};
 `;
 
 export const GoBackButton = styled.button`
@@ -16,8 +33,8 @@ export const GoBackButton = styled.button`
   margin: 1.25em;
   padding: 0.25em 1em;
   border-radius: 3px;
-  color: ${props => props.theme.mainColor};
-  background-color: ${props => props.theme.backgroundColor};
+  color: ${(props) => props.theme.mainColor};
+  background-color: ${(props) => props.theme.backgroundColor};
 `;
 
 export const DetailWrapper = styled.div`
@@ -45,11 +62,10 @@ export const SearchBarStyled = styled.input`
 
 export const ThemeButton = styled.button`
   font-size: 1em;
-  margin: 1.25em;
   padding: 0.25em 1em;
   border-radius: 3px;
-  background-color: ${props => props.theme.mainColor};
-  color: ${props => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.mainColor};
+  color: ${(props) => props.theme.backgroundColor};
 `;
 
 export const Title = styled.h1`
@@ -88,7 +104,7 @@ export const CookieWrapper = styled.div`
     text-align: center;
 
     &.cookie-price {
-      color: ${props => props.theme.pink}
+      color: ${(props) => props.theme.pink};
     }
   }
 `;
