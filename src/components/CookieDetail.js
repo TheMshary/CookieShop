@@ -1,13 +1,19 @@
 import React from "react";
 import { Redirect, useParams } from "react-router-dom";
+import { observer } from "mobx-react";
 
+// Stores
+import cookieStore from '../stores/cookieStore';
+
+// Styles
 import { DetailWrapper } from "../styles";
+
+// Components
 import DeleteButton from "./buttons/DeleteButton";
 
-const CookieDetail = ({ cookies, deleteCookie }) => {
-  // const cookieSlug = useParams().cookieSlug;
+const CookieDetail = () => {
   const { cookieSlug } = useParams();
-  const cookie = cookies.find((_cookie) => _cookie.slug === cookieSlug);
+  const cookie = cookieStore.cookies.find((_cookie) => _cookie.slug === cookieSlug);
 
   if (!cookie) return <Redirect to="/cookies" />;
 
@@ -18,10 +24,10 @@ const CookieDetail = ({ cookies, deleteCookie }) => {
         <img src={cookie.image} alt={cookie.name} />
         <p>{cookie.description}</p>
         <p>{cookie.price} KD</p>
-        <DeleteButton cookieId={cookie.id} deleteCookie={deleteCookie} />
+        <DeleteButton cookieId={cookie.id} />
       </DetailWrapper>
     </>
   );
 };
 
-export default CookieDetail;
+export default observer(CookieDetail);

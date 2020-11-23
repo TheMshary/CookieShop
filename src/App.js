@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Route, Switch } from "react-router";
-import cookies from "./cookies";
 
 // Styles
-import { GlobalStyle, ThemeButton } from "./styles";
+import { GlobalStyle } from "./styles";
 import { ThemeProvider } from "styled-components";
 
 // Components
@@ -29,12 +28,6 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
-  const [_cookies, setCookies] = useState(cookies);
-
-  const deleteCookie = (cookieId) => {
-    const updatedCookies = _cookies.filter((cookie) => cookie.id !== cookieId);
-    setCookies(updatedCookies);
-  };
 
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
@@ -46,10 +39,10 @@ function App() {
 
       <Switch>
         <Route path="/cookies/:cookieSlug">
-          <CookieDetail cookies={_cookies} deleteCookie={deleteCookie} />
+          <CookieDetail />
         </Route>
         <Route path="/cookies">
-          <CookieList cookies={_cookies} deleteCookie={deleteCookie} />
+          <CookieList />
         </Route>
         <Route path="/">
           <Home />

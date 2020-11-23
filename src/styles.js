@@ -7,6 +7,21 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${(props) => props.theme.backgroundColor};
   }
 `;
+
+export const UpdateButtonStyled = styled.p`
+  color: ${(props) => props.theme.pink};
+`;
+
+export const CreateButtonStyled = styled.button`
+  color: ${(props) => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.mainColor};
+
+  &:hover {
+    color: ${(props) => props.theme.mainColor};
+    background-color: ${(props) => props.theme.backgroundColor};
+  }
+`;
+
 export const Logo = styled(Link)`
   padding: 0.75em;
 
