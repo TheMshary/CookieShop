@@ -12,24 +12,20 @@ import CookieItem from "./CookieItem";
 import SearchBar from "./SearchBar";
 import AddButton from "./buttons/AddButton";
 
-const CookieList = (props) => {
+const CookieList = ({ cookies }) => {
   const [query, setQuery] = useState("");
 
-  const filteredCookies = cookieStore.cookies.filter((cookie) =>
+  const filteredCookies = cookies.filter((cookie) =>
     cookie.name.toLowerCase().includes(query.toLowerCase())
   );
 
   const cookieList = filteredCookies.map((cookie) => (
-    <CookieItem
-      cookie={cookie}
-      key={cookie.id}
-    />
+    <CookieItem cookie={cookie} key={cookie.id} />
   ));
 
   return (
     <>
       <SearchBar setQuery={setQuery} />
-      <AddButton />
       <ListWrapper>{cookieList}</ListWrapper>
     </>
   );

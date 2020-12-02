@@ -1,6 +1,10 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 
+export const BakeryItemImage = styled.img`
+  width: 40%;
+`;
+
 export const GlobalStyle = createGlobalStyle`
   body {
     color: ${(props) => props.theme.mainColor};
