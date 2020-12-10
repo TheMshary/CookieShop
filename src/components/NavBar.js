@@ -1,9 +1,17 @@
 import React from "react";
 import lightLogo from "../light-logo.png";
 import darkLogo from "../dark-logo.png";
+import { FiLogOut } from "react-icons/fi";
 
 // Styles
-import { Logo, NavItem, ThemeButton } from "../styles";
+import { Logo, NavItem, ThemeButton, UsernameStyled } from "../styles";
+
+// Components
+
+import SignupButton from "./buttons/SignupButton";
+import SigninButton from "./buttons/SigninButton";
+import authStore from "../stores/authStore";
+import { observer } from "mobx-react";
 
 const NavBar = ({ currentTheme, toggleTheme }) => {
   return (
@@ -25,6 +33,21 @@ const NavBar = ({ currentTheme, toggleTheme }) => {
             </NavItem>
           </li>
           <li className="nav-item">
+            {authStore.user ? (
+              <>
+                <UsernameStyled>
+                  Halla Wallah, {authStore.user.username}
+                </UsernameStyled>
+                <FiLogOut onClick={authStore.signout} size="2em" color="red" />
+              </>
+            ) : (
+              <>
+                <SignupButton />
+                <SigninButton />
+              </>
+            )}
+          </li>
+          <li className="nav-item">
             <ThemeButton onClick={toggleTheme}>
               {currentTheme === "light" ? "Dark" : "Light"} Mode
             </ThemeButton>
@@ -35,4 +58,4 @@ const NavBar = ({ currentTheme, toggleTheme }) => {
   );
 };
 
-export default NavBar;
+export default observer(NavBar);

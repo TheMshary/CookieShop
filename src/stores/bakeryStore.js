@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import axios from "axios";
+import instance from "./instance";
 
 class BakeryStore {
   bakeries = [];
@@ -11,7 +11,7 @@ class BakeryStore {
 
   fetchBakeries = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/bakeries");
+      const response = await instance.get("/bakeries");
       this.bakeries = response.data;
       this.loading = false;
     } catch (error) {

@@ -1,6 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
-import slugify from "react-slugify";
-import axios from "axios";
+import instance from "./instance";
 
 class CookieStore {
   cookies = [];
@@ -22,7 +21,7 @@ class CookieStore {
 
   fetchCookies = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/cookies");
+      const response = await instance.get("/cookies");
       this.cookies = response.data;
       this.loading = false;
     } catch (error) {
@@ -38,8 +37,8 @@ class CookieStore {
       const formData = new FormData();
       for (const key in newCookie) formData.append(key, newCookie[key]);
 
-      const response = await axios.post(
-        `http://localhost:8000/bakeries/${bakery.id}/cookies`,
+      const response = await instance.post(
+        `/bakeries/${bakery.id}/cookies`,
         formData
       );
       this.cookies.push(response.data);
@@ -60,10 +59,7 @@ class CookieStore {
     try {
       const formData = new FormData();
       for (const key in updatedCookie) formData.append(key, updatedCookie[key]);
-      await axios.put(
-        `http://localhost:8000/cookies/${updatedCookie.id}`,
-        formData
-      );
+      await instance.put(`/cookies/${updatedCookie.id}`, formData);
       let cookie = this.cookies.find(
         (cookie) => cookie.id === updatedCookie.id
       );
@@ -79,7 +75,7 @@ class CookieStore {
 
   deleteCookie = async (cookieId) => {
     try {
-      await axios.delete(`http://localhost:8000/cookies/${cookieId}`);
+      await instance.delete(`/cookies/${cookieId}`);
       this.cookies = this.cookies.filter((cookie) => cookie.id !== cookieId);
     } catch (error) {
       console.error(

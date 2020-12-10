@@ -10,6 +10,7 @@ import { DetailWrapper } from "../styles";
 import CookieList from "./CookieList";
 import AddButton from "./buttons/AddButton";
 import cookieStore from "../stores/cookieStore";
+import authStore from "../stores/authStore";
 
 const BakeryDetail = () => {
   const { bakerySlug } = useParams();
@@ -29,7 +30,7 @@ const BakeryDetail = () => {
         <img src={bakery.image} alt={bakery.name} />
       </DetailWrapper>
       <CookieList cookies={cookiesFromCookieStore} />
-      <AddButton bakery={bakery} />
+      {authStore.user && <AddButton bakery={bakery} />}
     </div>
   );
 };
